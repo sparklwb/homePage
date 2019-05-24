@@ -1,7 +1,8 @@
 <template>
-  <section>
+  <section @click="toBlog">
     <canvas id="atom" style="background-color:rgb(247,250,252)"></canvas>
     <div class="title animated bounce">Welcome to Spark's homePage !</div>
+    <!-- <div class=""></div> -->
     <!-- <div class="bar">
       <nuxt-link to="/blog">
         <IntroBox icon="icon-blog" text="Blog"></IntroBox>
@@ -13,13 +14,13 @@
         <IntroBox icon="icon-none" text="Nothing"></IntroBox>
       </nuxt-link>
     </div>-->
-    <h4 class="bottom-text">
+    <!-- <h4 class="bottom-text">
       联系我，请戳:
       <a href="mailto:sparklv@outlook.com">
         send me an email
         <i class="iconfont icon-youjian" style="font-size:30px;margin-top:-10px"></i>
       </a>
-    </h4>
+    </h4> -->
   </section>
 </template>
 
@@ -36,7 +37,7 @@ export default {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve({});
-      }, 5000);
+      }, 500);
     });
   },
   data() {
@@ -68,6 +69,9 @@ export default {
         num: num
       });
       obj.run();
+    },
+    toBlog(){
+      this.$router.push('blog')
     }
   }
 };
