@@ -1,8 +1,6 @@
 <template>
   <div>
-    <header class="header">
-      <a class="logo" href="#">spark's blog</a>
-    </header>
+    <BHeader/>
     <div class="banner">
       <!-- <img class="banner-img" src="../../assets/images/banner.jpg" alt="banner"> -->
     </div>
@@ -19,6 +17,7 @@
   </div>
 </template>
 <script>
+import BHeader from "./components/header";
 export default {
   asyncData() {
     return new Promise((resolve, reject) => {
@@ -26,17 +25,17 @@ export default {
         resolve({});
       }, 1000);
     });
+  },
+  components: {
+    BHeader
   }
 };
 </script>
 <style lang="scss" scoped>
-.header {
-  height: 50px;
-  background: #444;
-}
 .banner {
-  height: 400px;
+  height: 250px;
   overflow: hidden;
+  background:#6b91e1;
   .banner-img {
     width: 100%;
     // height:250px;
