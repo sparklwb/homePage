@@ -6,8 +6,8 @@
     </div>
     <main class="main">
       <section class="main-content">
-        <nav class="main-nav"></nav>
-        <div></div>
+        <BNav/>
+        <BlogBox/>
       </section>
       <aside class="aside">
         <nav class="date-nav"></nav>
@@ -18,6 +18,8 @@
 </template>
 <script>
 import BHeader from "./components/header";
+import BNav from "./components/blogNav";
+import BlogBox from "./components/blogBox";
 export default {
   asyncData() {
     return new Promise((resolve, reject) => {
@@ -27,32 +29,50 @@ export default {
     });
   },
   components: {
-    BHeader
+    BHeader,
+    BNav,
+    BlogBox
+  },
+  mounted() {
+    // console.log(this.$t('links.home'))
+    // this.$i18n.locale = 'fr'
+    // console.log(this.$t('links.home'))
   }
 };
 </script>
 <style lang="scss" scoped>
+$content-width: 750px;
+$aside-width: 220px;
 .banner {
   height: 250px;
   overflow: hidden;
-  background:#6b91e1;
+  background: #6b91e1;
   .banner-img {
     width: 100%;
     // height:250px;
   }
 }
 .main {
-  display: flex;
+  width: $content-width + $aside-width + 20px;
+  margin: 20px auto;
   .main-content {
-    flex: 1;
-    height: 1000px;
-    background: #987976;
+    float: left;
+    width: $content-width;
+    min-height: 1000px;
   }
   .aside {
-    width: 200px;
+    float: left;
+    width: $aside-width;
     height: 600px;
     background: #546847;
     margin-left: 20px;
+  }
+  &::after {
+    content: " ";
+    clear: both;
+    display: block;
+    font-size: 0;
+    height: 0;
   }
 }
 .footer {

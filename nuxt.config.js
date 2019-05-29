@@ -20,13 +20,16 @@ export default {
   /*
    ** Global CSS
    */
-  css: ["animate.css/animate.min.css"],
+  css: ["animate.css/animate.min.css","@/assets/fonts/iconfont.css"],
 
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ["@/plugins"],
+  plugins: ["@/plugins",'~/plugins/i18n.js'],
 
+  router: {
+    middleware: 'i18n'
+  },
   /*
    ** Nuxt.js modules
    */

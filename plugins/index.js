@@ -1,4 +1,4 @@
-import vue from 'vue'
-import sparkUI from './sparkUI'
+import vue from "vue";
+import sparkUI from "./sparkUI";
 
-vue.use(sparkUI)
+vue.use(sparkUI);
