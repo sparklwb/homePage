@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-      <BlogItem />
+      <BlogItem v-for="item in 15" :key="item" />
   </div>
 </template>
 <script>

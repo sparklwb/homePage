@@ -41,8 +41,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-$content-width: 750px;
-$aside-width: 220px;
 .banner {
   height: 250px;
   overflow: hidden;
@@ -53,19 +51,20 @@ $aside-width: 220px;
   }
 }
 .main {
-  width: $content-width + $aside-width + 20px;
+  width: 880px;
   margin: 20px auto;
   .main-content {
     float: left;
-    width: $content-width;
+    width: 640px;
     min-height: 1000px;
   }
   .aside {
     float: left;
-    width: $aside-width;
+    width: 220px;
     height: 600px;
     background: #546847;
     margin-left: 20px;
+    margin-top:40px;
   }
   &::after {
     content: " ";
@@ -78,5 +77,13 @@ $aside-width: 220px;
 .footer {
   height: 300px;
   background: #333;
+}
+@media screen and (min-width: 1200px) {
+  .main {
+    width: 1200px;
+    .main-content {
+      width: 960px;
+    }
+  }
 }
 </style>

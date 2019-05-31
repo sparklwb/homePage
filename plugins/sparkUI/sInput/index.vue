@@ -1,11 +1,32 @@
 <template>
   <div class="input-box">
-    <input class="input" type="text">
+    <input v-model="text" class="input" type="text">
   </div>
 </template>
 <script>
 export default {
-  name: "sInput"
+  name: "sInput",
+  data() {
+    return {
+      text: "",
+      canSet: true
+    };
+  },
+  props: ["value"],
+  watch: {
+    value() {
+      this.text = this.value;
+    },
+    text() {
+      if (this.canSet) {
+        this.$emit("input", this.text);
+        this.canSet = false;
+        this.$nextTick(() => {
+          this.canSet = true;
+        });
+      }
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
