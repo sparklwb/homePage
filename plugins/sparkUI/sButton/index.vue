@@ -23,7 +23,7 @@ export default {
   }
 };
 </script>
-<style lang="css" scoped>
+<style scoped>
 .s-btn {
   display: inline-block;
   padding: 14px 26px;

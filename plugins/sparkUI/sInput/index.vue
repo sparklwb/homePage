@@ -1,6 +1,6 @@
 <template>
   <div class="input-box">
-    <input v-model="text" class="input" type="text">
+    <input v-model="text" class="input" :type="type">
   </div>
 </template>
 <script>
@@ -12,7 +12,10 @@ export default {
       canSet: true
     };
   },
-  props: ["value"],
+  props: {
+    value: String,
+    type: { type: String, default: "text" }
+  },
   watch: {
     value() {
       this.text = this.value;
@@ -29,19 +32,19 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style scoped>
 .input-box {
   width: 300px;
-  .input {
-    width: 100%;
-    height: 35px;
-    padding: 5px 10px;
-    line-height: 35px;
-    font-size: 14px;
-    box-shadow: none;
-    outline-style: none;
-    border-radius: 4px;
-    border: 1px solid #b3b4b5;
-  }
+}
+.input {
+  width: 100%;
+  height: 35px;
+  padding: 5px 10px;
+  line-height: 35px;
+  font-size: 14px;
+  box-shadow: none;
+  outline-style: none;
+  border-radius: 4px;
+  border: 1px solid #b3b4b5;
 }
 </style>
