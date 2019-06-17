@@ -20,12 +20,12 @@ export default {
   /*
    ** Global CSS
    */
-  css: ["animate.css/animate.min.css", "@/assets/fonts/iconfont.css", "@/assets/index.scss", "highlight.js/styles/github.css"],
+  css: ["animate.css/animate.min.css", "@/assets/fonts/iconfont.css", "@/assets/index.scss", "highlight.js/styles/github.css", "codemirror/lib/codemirror.css"],
 
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ["@/plugins", "~/plugins/i18n.js"],
+  plugins: [{ src: "@/plugins", ssr: false }, "~/plugins/i18n.js", { src: "~/plugins/codemirror.js", ssr: false }],
 
   router: {
     middleware: "i18n"

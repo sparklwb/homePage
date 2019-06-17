@@ -21,7 +21,7 @@ export default {};
   background: #fff;
   .logo {
     float: left;
-    margin-left:100px;
+    margin-left: 100px;
   }
   .search-box {
     float: right;
@@ -32,9 +32,12 @@ export default {};
       position: relative;
       background: #7392db;
       border-radius: 50%;
-      padding: 10px;
       cursor: pointer;
       z-index: 100;
+      width: 46px;
+      height: 46px;
+      line-height: 46px;
+      text-align: center;
       .iconsearch {
         color: #fff;
         font-size: 24px;
@@ -48,7 +51,7 @@ export default {};
       background: #7392db;
       border-radius: 23px 0 0 23px;
       width: 0;
-      transition: width .5s;
+      transition: width 0.5s;
       overflow: hidden;
       .search-input {
         position: absolute;

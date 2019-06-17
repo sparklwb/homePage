@@ -3,7 +3,7 @@
     <canvas id="atom" style="background-color:rgb(247,250,252)"></canvas>
     <div class="content">
       <div class="title animated bounce">Welcome to Spark's homePage !</div>
-      <s-button style="margin-top:50px;" type="sblue" @click="toBlog">B l o g</s-button>
+      <Button style="margin-top:50px;" size="large" type="primary" @click="toBlog">B l o g</Button>
     </div>
   </section>
 </template>

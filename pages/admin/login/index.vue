@@ -1,8 +1,8 @@
 <template>
   <div>
-    <s-input v-model="username"/>
-    <s-input type="password" v-model="password"/>
-    <s-button @click="login" type="sblue">login</s-button>
+    <Input v-model="username"/>
+    <Input type="password" v-model="password"/>
+    <Button @click="login">login</Button>
   </div>
 </template>
 <script>
@@ -13,9 +13,9 @@ export default {
       password: ""
     };
   },
-  methods:{
-    login(){
-      this.$router.push('/admin/bg')
+  methods: {
+    login() {
+      this.$router.push("/admin/bg");
     }
   }
 };

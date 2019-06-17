@@ -1,4 +1,6 @@
-import vue from "vue";
-import sparkUI from "./sparkUI";
+import Vue from "vue";
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
 
-vue.use(sparkUI);
+
+Vue.use(iView);
