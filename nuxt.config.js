@@ -25,7 +25,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: "@/plugins", ssr: false }, "~/plugins/i18n.js", { src: "~/plugins/codemirror.js", ssr: false }],
+  plugins: [{ src: "@/plugins", ssr: true }, "~/plugins/i18n.js", { src: "~/plugins/codemirror.js", ssr: false }],
 
   router: {
     middleware: "i18n"

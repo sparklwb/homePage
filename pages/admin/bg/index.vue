@@ -9,6 +9,7 @@
           <Icon type="ios-paper"/>内容管理
       </template>-->
       <MenuItem name="1-1">文章管理</MenuItem>
+      <MenuItem name="1-2">标签管理</MenuItem>
       <!-- <MenuItem name="1-2">评论管理</MenuItem> -->
       <!-- <MenuItem name="1-3">举报管理</MenuItem> -->
       <!-- </Submenu> -->
@@ -36,11 +37,13 @@
     </Menu>
     <div class="content">
       <Add v-if="nowActiveMenu==='add'"/>
+      <Tags v-if="nowActiveMenu==='1-2'"/>
     </div>
   </div>
 </template>
 <script>
 import Add from "./components/add";
+import Tags from './components/tags'
 export default {
   data() {
     return {
@@ -48,7 +51,8 @@ export default {
     };
   },
   components: {
-    Add
+    Add,
+    Tags
   },
   methods: {
     selMenu(name) {
