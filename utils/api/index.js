@@ -9,8 +9,8 @@ export default class Api extends config {
     const path = `/blog/tags`;
     return this.comPost(path, data);
   }
-  static getTagsByPage(data) {
-    const path = `/blog/tags/page`;
-    return this.comPost(path, data);
+  static getTags() {
+    const path = `/blog/tags`;
+    return this.comGet(path);
   }
 }

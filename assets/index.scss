@@ -4,3 +4,28 @@ a {
     color: #333;
   }
 }
+.CodeMirror {
+  height: auto !important;
+  width: 100%;
+}
+pre code.hljs {
+  display: block;
+}
+
+code.hljs {
+  display: inline;
+}
+.md-box .right-box div * {
+  line-height: 38px;
+}
+.md-box .right-box hr {
+  margin: 24px 0;
+}
+.md-box .right-box img {
+  max-width: 100%;
+}
+.md-box blockquote {
+  border-left: 0.25em solid #dfe2e5;
+  color: #6a737d;
+  padding: 0 1em;
+}

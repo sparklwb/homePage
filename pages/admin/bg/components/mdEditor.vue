@@ -10,8 +10,8 @@
         <Icon type="md-send"/>
       </div>
       <div class="tool-icon" style="float:right;margin-right:10px;">
-        <Select v-model="tag" multiple style="width:220px">
-          <!-- <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option> -->
+        <Select v-model="tag" multiple style="width:250px">
+          <Option v-for="item in tags" :value="item.id" :key="item.id">{{ item.name }}</Option>
         </Select>
       </div>
     </div>
@@ -35,7 +35,8 @@ export default {
     return {
       code: "",
       mdHtml: "",
-      tag: "dddd"
+      tag: "",
+      tags: []
     };
   },
   computed: {
@@ -43,13 +44,30 @@ export default {
       return this.$refs.myCm.codemirror;
     }
   },
+  mounted() {
+    this.getTags();
+  },
   methods: {
+    async getTags() {
+      const res = await this.$api.getTags();
+      if (res) {
+        this.tags = res.data;
+      }
+    },
     inputCode(val) {
       this.code = val;
       this.setMdPre();
     },
     setMdPre() {
-      this.mdHtml = marked(this.code);
+      this.mdHtml = marked(this.code, {
+        gfm: true,
+        tables: true,
+        breaks: true,
+        pedantic: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false
+      });
       this.$nextTick(() => {
         hljs.initHighlightingOnLoad();
         document.querySelectorAll(".right-box blockquote").forEach(block => {
@@ -101,6 +119,7 @@ export default {
   .left-box,
   .right-box {
     flex: 1;
+    width: 0;
     height: 100vh;
     font-size: 14px;
     padding: 20px 30px;

@@ -6,9 +6,14 @@
 <script>
 import MdEditor from "./mdEditor";
 export default {
+  data() {
+    return {};
+  },
   components: {
     MdEditor
-  }
+  },
+  mounted() {},
+  methods: {}
 };
 </script>
 <style lang="scss" scoped>
