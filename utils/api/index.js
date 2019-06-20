@@ -13,4 +13,8 @@ export default class Api extends config {
     const path = `/blog/tags`;
     return this.comGet(path);
   }
+  static addBlog(data) {
+    const path = `/blog`;
+    return this.comPost(path, data);
+  }
 }

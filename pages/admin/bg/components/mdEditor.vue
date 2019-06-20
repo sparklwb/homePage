@@ -7,7 +7,7 @@
         </Upload>
       </div>
       <div class="tool-icon" style="float:right">
-        <Icon type="md-send"/>
+        <Icon type="md-send" @click="showModal = true"/>
       </div>
       <div class="tool-icon" style="float:right;margin-right:10px;">
         <Select v-model="tag" multiple style="width:250px">
@@ -25,6 +25,24 @@
         <div v-html="mdHtml"></div>
       </div>
     </div>
+    <Modal v-model="showModal" scrollable @on-ok="submit" :loading="addLoading" title="标签">
+      <Form ref="form" :model="form" :rules="rules" :label-width="80">
+        <FormItem label="title" prop="title">
+          <Input v-model="form.title"/>
+        </FormItem>
+        <FormItem label="cover" prop="cover">
+          <Upload action=" " :show-upload-list="false" :before-upload="beforeUploadCover">
+            <Icon style="font-size:24px" type="md-image"/>
+          </Upload>
+        </FormItem>
+        <FormItem v-if="form.cover" label=" ">
+          <img style="width:200px" :src="form.cover">
+        </FormItem>
+        <FormItem label="description" prop="description">
+          <Input v-model="form.description"/>
+        </FormItem>
+      </Form>
+    </Modal>
   </div>
 </template>
 <script>
@@ -35,8 +53,12 @@ export default {
     return {
       code: "",
       mdHtml: "",
-      tag: "",
-      tags: []
+      tag: [],
+      tags: [],
+      showModal: false,
+      addLoading: true,
+      form: {},
+      rules: {}
     };
   },
   computed: {
@@ -92,6 +114,43 @@ export default {
         );
       }
       return false;
+    },
+    async beforeUploadCover(file) {
+      const formdata = new FormData();
+      formdata.append("file", file);
+      const res = await this.$api.upload(formdata);
+      if (res) {
+        const path = `http://blogcdn.sparklv.cn/${file.name}`;
+        this.$set(this.form, "cover", path);
+      }
+      return false;
+    },
+    submit() {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          this.submitRun();
+        } else {
+          this.addLoading = false;
+          this.$nextTick(() => {
+            this.addLoading = true;
+          });
+        }
+      });
+    },
+    async submitRun() {
+      const res = await this.$api.addBlog(
+        Object.assign(this.form, {
+          content: this.code,
+          tags: this.tag.join(","),
+          auth: "geolic"
+        })
+      );
+      if (res) {
+        this.showModal = false;
+        this.$Message.success({
+          content: "操作成功"
+        });
+      }
     }
   }
 };
