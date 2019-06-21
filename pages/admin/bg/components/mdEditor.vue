@@ -61,6 +61,7 @@ export default {
       rules: {}
     };
   },
+  props: ["editData"],
   computed: {
     codemirror() {
       return this.$refs.myCm.codemirror;
@@ -68,6 +69,11 @@ export default {
   },
   mounted() {
     this.getTags();
+    if (this.editData) {
+      this.code = this.editData.content;
+      this.tag = this.editData.tags.split(",").map(item => parseInt(item, 10));
+      this.form = this.editData;
+    }
   },
   methods: {
     async getTags() {

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <MdEditor/>
+    <Button v-if="editData" @click="close">Back</Button>
+    <MdEditor :editData="editData"/>
   </div>
 </template>
 <script>
@@ -9,11 +10,16 @@ export default {
   data() {
     return {};
   },
+  props: ["editData"],
   components: {
     MdEditor
   },
   mounted() {},
-  methods: {}
+  methods: {
+    close() {
+      this.$emit("close");
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

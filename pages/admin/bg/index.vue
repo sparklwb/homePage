@@ -37,13 +37,15 @@
     </Menu>
     <div class="content">
       <Add v-if="nowActiveMenu==='add'"/>
+      <List v-if="nowActiveMenu==='1-1'"/>
       <Tags v-if="nowActiveMenu==='1-2'"/>
     </div>
   </div>
 </template>
 <script>
 import Add from "./components/add";
-import Tags from './components/tags'
+import List from "./components/list";
+import Tags from "./components/tags";
 export default {
   data() {
     return {
@@ -52,6 +54,7 @@ export default {
   },
   components: {
     Add,
+    List,
     Tags
   },
   methods: {
