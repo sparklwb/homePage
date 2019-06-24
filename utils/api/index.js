@@ -1,6 +1,10 @@
 import config from "./config";
 
 export default class Api extends config {
+  static login(data) {
+    const path = `/blog/login`;
+    return this.comPost(path, data);
+  }
   static upload(data) {
     const path = `/blog/upload`;
     return this.comPost(path, data);
@@ -15,6 +19,10 @@ export default class Api extends config {
   }
   static addBlog(data) {
     const path = `/blog`;
+    return this.comPost(path, data);
+  }
+  static updateBlog(id, data) {
+    const path = `/blog/${id}`;
     return this.comPost(path, data);
   }
   static getBlogByPage(data) {

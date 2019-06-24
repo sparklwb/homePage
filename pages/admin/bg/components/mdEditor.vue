@@ -38,6 +38,9 @@
         <FormItem v-if="form.cover" label=" ">
           <img style="width:200px" :src="form.cover">
         </FormItem>
+        <FormItem label="keywords" prop="keywords">
+          <Input v-model="form.keywords"/>
+        </FormItem>
         <FormItem label="description" prop="description">
           <Input v-model="form.description"/>
         </FormItem>
@@ -73,6 +76,7 @@ export default {
       this.code = this.editData.content;
       this.tag = this.editData.tags.split(",").map(item => parseInt(item, 10));
       this.form = this.editData;
+      this.setMdPre();
     }
   },
   methods: {
@@ -134,7 +138,11 @@ export default {
     submit() {
       this.$refs.form.validate(valid => {
         if (valid) {
-          this.submitRun();
+          if (this.editData) {
+            this.subUpdateRun();
+          } else {
+            this.submitRun();
+          }
         } else {
           this.addLoading = false;
           this.$nextTick(() => {
@@ -145,6 +153,22 @@ export default {
     },
     async submitRun() {
       const res = await this.$api.addBlog(
+        Object.assign(this.form, {
+          content: this.code,
+          tags: this.tag.join(","),
+          auth: "geolic"
+        })
+      );
+      if (res) {
+        this.showModal = false;
+        this.$Message.success({
+          content: "操作成功"
+        });
+      }
+    },
+    async subUpdateRun() {
+      const res = await this.$api.updateBlog(
+        this.form.id,
         Object.assign(this.form, {
           content: this.code,
           tags: this.tag.join(","),
