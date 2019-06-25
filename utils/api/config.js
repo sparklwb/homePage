@@ -4,10 +4,10 @@ import Vue from "vue";
 const ip = "http://localhost:1510";
 
 axios.interceptors.request.use(config => {
-  if (localStorage.getItem("token")) {
-    config.headers.Token = localStorage.getItem("token");
-    config.headers.TDomain = document.location.hostname;
-  }
+  // if (localStorage.getItem("token")) {
+  //   config.headers.Token = localStorage.getItem("token");
+  //   config.headers.TDomain = document.location.hostname;
+  // }
   return config;
 });
 
@@ -19,17 +19,21 @@ axios.interceptors.response.use(
       } else if (!response.data.code) {
         return response;
       } else {
-        Vue.prototype.$Message.error({
-          content: "请求错误"
-        });
+        if (process.client) {
+          Vue.prototype.$Message.error({
+            content: "请求错误"
+          });
+        }
         return false;
       }
     }
   },
   error => {
-    Vue.prototype.$Message.error({
-      content: "请求错误"
-    });
+    if (process.client) {
+      Vue.prototype.$Message.error({
+        content: "请求错误"
+      });
+    }
   }
 );
 

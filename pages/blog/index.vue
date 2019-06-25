@@ -7,7 +7,7 @@
     <main class="main">
       <section class="main-content">
         <BNav/>
-        <BlogBox/>
+        <BlogBox :blogList="blogList"/>
       </section>
       <aside class="aside">
         <nav class="date-nav"></nav>
@@ -20,13 +20,17 @@
 import BHeader from "./components/header";
 import BNav from "./components/blogNav";
 import BlogBox from "./components/blogBox";
+import api from "@/utils/api";
 export default {
-  asyncData() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({});
-      }, 1000);
-    });
+  data() {
+    return {
+      blogList: []
+    };
+  },
+  async asyncData({ params }) {
+    const res = await api.getBlogByPage({ pageSize: 10, pageNum: 1 });
+    const arr = res ? res.data.data : [];
+    return { blogList: arr };
   },
   components: {
     BHeader,
@@ -34,10 +38,14 @@ export default {
     BlogBox
   },
   mounted() {
+    console.log(this.blogList);
     // console.log(this.$t('links.home'))
     // this.$i18n.locale = 'fr'
     // console.log(this.$t('links.home'))
   }
+  // mounted() {
+
+  // }
 };
 </script>
 <style lang="scss" scoped>
@@ -64,7 +72,7 @@ export default {
     height: 600px;
     background: #546847;
     margin-left: 20px;
-    margin-top:40px;
+    margin-top: 40px;
   }
   &::after {
     content: " ";
