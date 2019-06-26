@@ -38,7 +38,6 @@ export default {
     BlogBox
   },
   mounted() {
-    console.log(this.blogList);
     // console.log(this.$t('links.home'))
     // this.$i18n.locale = 'fr'
     // console.log(this.$t('links.home'))
