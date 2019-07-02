@@ -1,13 +1,13 @@
 <template>
   <div>
-    <BHeader/>
+    <BHeader @search="search" />
     <div class="banner">
       <!-- <img class="banner-img" src="../../assets/images/banner.jpg" alt="banner"> -->
     </div>
     <main class="main">
       <section class="main-content">
-        <BNav/>
-        <BlogBox :blogList="blogList"/>
+        <BNav />
+        <BlogBox :blogList="blogList" />
       </section>
       <aside class="aside">
         <nav class="date-nav"></nav>
@@ -37,14 +37,19 @@ export default {
     BNav,
     BlogBox
   },
-  mounted() {
-    // console.log(this.$t('links.home'))
-    // this.$i18n.locale = 'fr'
-    // console.log(this.$t('links.home'))
+  mounted() {},
+  methods: {
+    async search(text) {
+      const res = await api.getBlogByPage({
+        title: text,
+        pageSize: 10,
+        pageNum: 1
+      });
+      if (res) {
+        this.blogList = res.data.data;
+      }
+    }
   }
-  // mounted() {
-
-  // }
 };
 </script>
 <style lang="scss" scoped>

@@ -3,17 +3,28 @@
     <a class="logo" href="#">spark's blog</a>
     <!-- <s-input class="search-input"></s-input> -->
     <div class="search-box">
-      <div class="icon-box">
+      <div @click="search" class="icon-box">
         <i class="iconfont iconsearch"></i>
       </div>
       <div class="input-box">
-        <input class="search-input" type="text">
+        <input v-model="text" class="search-input" type="text" />
       </div>
     </div>
   </header>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      text: ""
+    };
+  },
+  methods: {
+    search() {
+      this.$emit("search", this.text);
+    }
+  }
+};
 </script>
 <style lang="scss" scoped>
 .header {
