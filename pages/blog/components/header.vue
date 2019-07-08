@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <a class="logo" href="#">spark's blog</a>
+    <a class="logo" href="/blog">Blog</a>
     <!-- <s-input class="search-input"></s-input> -->
     <div class="search-box">
       <div @click="search" class="icon-box">
