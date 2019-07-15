@@ -1,13 +1,14 @@
 <template>
   <div class="box">
-    <BlogItem v-for="item in blogList" :key="item.id" :blog="item" />
+    <BlogItem v-for="item in blogList" :tags="tags" :key="item.id" :blog="item" />
   </div>
 </template>
 <script>
 import BlogItem from "./blogItem";
 export default {
   props: {
-    blogList: Array
+    blogList: Array,
+    tags: Array
   },
   components: {
     BlogItem

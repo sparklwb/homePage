@@ -1,8 +1,8 @@
 <template>
   <header class="header">
-    <a class="logo" href="/blog">Blog</a>
+    <a class="logo" href="/blog">Geolic's Blog</a>
     <!-- <s-input class="search-input"></s-input> -->
-    <div class="search-box">
+    <div @keydown.enter="search" class="search-box">
       <div @click="search" class="icon-box">
         <i class="iconfont iconsearch"></i>
       </div>
@@ -33,6 +33,11 @@ export default {
   .logo {
     float: left;
     margin-left: 100px;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 60px;
+    font-style: italic;
+    color: #7291db;
   }
   .search-box {
     float: right;

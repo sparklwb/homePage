@@ -7,10 +7,18 @@
     <main class="main">
       <section class="main-content">
         <BNav />
-        <BlogBox :blogList="blogList" />
+        <BlogBox :tags="tags" :blogList="blogList" />
       </section>
       <aside class="aside">
-        <nav class="date-nav"></nav>
+        <nav class="tag-nav">
+          <div class="tag-nav-catalog">Catalog</div>
+          <div
+            v-for="item in tags"
+            :key="item.id"
+            :style="{color:activeCata===item.id?'#7292dc':'#333'}"
+            class="tag-nav-item"
+          >{{item.name}}</div>
+        </nav>
       </aside>
     </main>
     <footer class="footer"></footer>
@@ -24,7 +32,9 @@ import api from "@/utils/api";
 export default {
   data() {
     return {
-      blogList: []
+      blogList: [],
+      tags: [],
+      activeCata: "0"
     };
   },
   async asyncData({ params }) {
@@ -37,7 +47,9 @@ export default {
     BNav,
     BlogBox
   },
-  mounted() {},
+  mounted() {
+    this.getTags();
+  },
   methods: {
     async search(text) {
       const res = await api.getBlogByPage({
@@ -47,6 +59,13 @@ export default {
       });
       if (res) {
         this.blogList = res.data.data;
+      }
+    },
+    async getTags() {
+      const res = await api.getTags();
+      if (res) {
+        res.data.unshift({ id: "0", name: "All" });
+        this.tags = res.data;
       }
     }
   }
@@ -74,9 +93,21 @@ export default {
     float: left;
     width: 220px;
     height: 600px;
-    background: #546847;
     margin-left: 20px;
     margin-top: 40px;
+    .tag-nav-catalog {
+      font-size: 18px;
+      font-weight: 500;
+      border-left: 5px solid #6b91e2;
+      padding-left: 15px;
+    }
+    .tag-nav-item {
+      margin: 5px 0;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 400;
+      padding-left: 23px;
+    }
   }
   &::after {
     content: " ";

@@ -1,6 +1,7 @@
 <template>
   <article>
     <div class="img-box">
+      <a class="logo" href="/blog">Geolic's Blog</a>
       <img :src="blogData.cover" style="width:100%;" :alt="blogData.title" />
       <div class="mask"></div>
       <div class="title-box">
@@ -55,6 +56,17 @@ export default {
 .img-box {
   position: relative;
   width: 100%;
+  .logo {
+    position: absolute;
+    top: 20px;
+    left: 100px;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 60px;
+    font-style: italic;
+    color: #fff;
+    z-index: 12;
+  }
   .mask {
     position: absolute;
     background: rgba(0, 0, 0, 0.5);
@@ -78,14 +90,14 @@ export default {
       width: 100%;
       margin: 0 0 10px;
       color: #fff;
-      font-weight: 400;
+      font-weight: 600;
       letter-spacing: 5px;
-      font-size: 32px;
+      font-size: 36px;
     }
   }
 }
 .outer-box {
-  margin: 0 auto;
+  margin: 0 auto 50px;
   width: 800px;
   .oper-bar {
     margin: 20px 0;

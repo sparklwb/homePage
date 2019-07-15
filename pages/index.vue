@@ -2,7 +2,7 @@
   <section>
     <canvas id="atom" style="background-color:rgb(247,250,252)"></canvas>
     <div class="content">
-      <div class="title animated bounce">Welcome to Spark's homePage !</div>
+      <div class="title animated bounce">Welcome to Geolic's homePage !</div>
       <Button style="margin-top:50px;" size="large" type="primary" @click="toBlog">B l o g</Button>
     </div>
   </section>

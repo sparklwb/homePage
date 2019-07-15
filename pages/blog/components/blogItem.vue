@@ -2,12 +2,13 @@
   <article class="box">
     <nuxt-link :to="'/blog/content?id='+blog.id">
       <div class="head">
-        <img :src="blog.cover" alt srcset>
+        <img :src="blog.cover" alt srcset />
       </div>
       <div class="body">
         <div class="nav"></div>
         <div class="desc">
           <h3>{{blog.title}}</h3>
+          <!-- <span v-for="item in blogTags" :key="item.id">{{item.name}}</span> -->
           <div class="desc-text" style="-webkit-box-orient: vertical;">{{blog.description}}</div>
         </div>
       </div>
@@ -17,7 +18,20 @@
 <script>
 export default {
   props: {
-    blog: Object
+    blog: Object,
+    tags: Array
+  },
+  computed: {
+    blogTags() {
+      const tagArr = this.blog.tags.split(",");
+      return tagArr.map(item => {
+        if (this.tags.length) {
+          return this.tags.find(item2 => item2.id == item);
+        } else {
+          return {};
+        }
+      });
+    }
   }
 };
 </script>
