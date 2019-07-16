@@ -15,8 +15,9 @@
           <div
             v-for="item in tags"
             :key="item.id"
-            :style="{color:activeCata===item.id?'#7292dc':'#333'}"
+            :style="{color:activeCata==item.id?'#7292dc':'#333'}"
             class="tag-nav-item"
+            @click="changeCata(item.id)"
           >{{item.name}}</div>
         </nav>
       </aside>
@@ -34,11 +35,14 @@ export default {
     return {
       blogList: [],
       tags: [],
-      activeCata: "0"
+      activeCata: ""
     };
   },
-  async asyncData({ params }) {
-    const res = await api.getBlogByPage({ pageSize: 10, pageNum: 1 });
+  async asyncData({ params, route }) {
+    const res = await api.getBlogByPage({
+      pageSize: 10,
+      pageNum: 1
+    });
     const arr = res ? res.data.data : [];
     return { blogList: arr };
   },
@@ -49,13 +53,16 @@ export default {
   },
   mounted() {
     this.getTags();
+    this.activeCata = window.location.hash.slice(1) || "";
+    this.search();
   },
   methods: {
     async search(text) {
       const res = await api.getBlogByPage({
         title: text,
         pageSize: 10,
-        pageNum: 1
+        pageNum: 1,
+        tagId: this.activeCata
       });
       if (res) {
         this.blogList = res.data.data;
@@ -64,9 +71,16 @@ export default {
     async getTags() {
       const res = await api.getTags();
       if (res) {
-        res.data.unshift({ id: "0", name: "All" });
+        res.data.unshift({ id: "", name: "All" });
         this.tags = res.data;
       }
+    },
+    changeCata(id) {
+      window.location.hash = id;
+      this.activeCata = id;
+      this.search();
+      // this.$route.query.id = data.id;
+      // console.log(data);
     }
   }
 };
@@ -98,7 +112,7 @@ export default {
     .tag-nav-catalog {
       font-size: 18px;
       font-weight: 500;
-      border-left: 5px solid #6b91e2;
+      border-left: 3px solid #6b91e2;
       padding-left: 15px;
     }
     .tag-nav-item {
