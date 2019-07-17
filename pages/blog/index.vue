@@ -38,7 +38,7 @@ export default {
       activeCata: ""
     };
   },
-  async asyncData({ params, route }) {
+  async asyncData({ params }) {
     const res = await api.getBlogByPage({
       pageSize: 10,
       pageNum: 1
@@ -53,7 +53,7 @@ export default {
   },
   mounted() {
     this.getTags();
-    this.activeCata = window.location.hash.slice(1) || "";
+    this.activeCata = this.$route.query.tag || "";
     this.search();
   },
   methods: {
@@ -76,11 +76,13 @@ export default {
       }
     },
     changeCata(id) {
-      window.location.hash = id;
+      if (id) {
+        this.$router.push({ path: "/blog", query: { tag: id } });
+      } else {
+        this.$router.push({ path: "/blog" });
+      }
       this.activeCata = id;
       this.search();
-      // this.$route.query.id = data.id;
-      // console.log(data);
     }
   }
 };
