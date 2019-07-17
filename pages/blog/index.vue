@@ -8,6 +8,9 @@
       <section class="main-content">
         <BNav />
         <BlogBox :tags="tags" :blogList="blogList" />
+        <nav style="width:0;height:0;overflow:hidden">
+          <a v-for="item in totalPage" :key="item" :href="`/blog?page=${item}`">{{item}}</a>
+        </nav>
       </section>
       <aside class="aside">
         <nav class="tag-nav">
@@ -35,16 +38,18 @@ export default {
     return {
       blogList: [],
       tags: [],
-      activeCata: ""
+      activeCata: "",
+      page: 1,
+      total: 0
     };
   },
-  async asyncData({ params }) {
+  async asyncData({ params, route }) {
     const res = await api.getBlogByPage({
-      pageSize: 10,
-      pageNum: 1
+      pageSize: 18,
+      pageNum: route.query.page || 1
     });
     const arr = res ? res.data.data : [];
-    return { blogList: arr };
+    return { blogList: arr, total: res.data.total };
   },
   components: {
     BHeader,
@@ -54,14 +59,20 @@ export default {
   mounted() {
     this.getTags();
     this.activeCata = this.$route.query.tag || "";
+    this.page = this.$route.query.page || 1;
     this.search();
+  },
+  computed: {
+    totalPage() {
+      return Math.ceil(this.total / 18);
+    }
   },
   methods: {
     async search(text) {
       const res = await api.getBlogByPage({
         title: text,
-        pageSize: 10,
-        pageNum: 1,
+        pageSize: 18,
+        pageNum: this.page,
         tagId: this.activeCata
       });
       if (res) {
