@@ -13,7 +13,7 @@
   "dependencies": {
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
-    "codemirror": "^5.47.0",
+    "codemirror": "^5.58.2",
     "cross-env": "^5.2.0",
     "highlight.js": "^9.15.8",
     "iview": "^3.4.2",
